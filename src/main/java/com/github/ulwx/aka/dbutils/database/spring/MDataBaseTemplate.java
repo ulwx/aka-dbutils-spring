@@ -311,16 +311,12 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 
 	private  static Set<String> notInterceptorMethods=new HashSet<>();
 	static{
-		notInterceptorMethods.add("setAutoCommit");
-		notInterceptorMethods.add("getAutoCommit");
-		notInterceptorMethods.add("rollback");
-		notInterceptorMethods.add("getSavepoint");
-		notInterceptorMethods.add("setSavepoint");
-		notInterceptorMethods.add("releaseSavepoint");
-		notInterceptorMethods.add("rollbackToSavepoint");
-		notInterceptorMethods.add("isColsed");
-		notInterceptorMethods.add("commit");
-		notInterceptorMethods.add("getConnection");
+		for(Method method:MDataBaseTemplateUnSupported.class.getMethods()){
+			if(method.getDeclaringClass()==Object.class){
+				continue;
+			}
+			notInterceptorMethods.add(method.getName());
+		}
 	}
 	public  class MDataBaseMethodInterceptor implements MethodInterceptor {
 
