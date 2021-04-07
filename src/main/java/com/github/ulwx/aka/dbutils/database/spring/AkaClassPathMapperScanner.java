@@ -110,7 +110,7 @@ public class AkaClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
             }
 
             if (!inject) {
-                throw new DbException("AkaMapperFactoryBean with name '" + holder.getBeanName() +" 沒有注入MDataBaseTemplate对象！");
+                throw new DbException("AkaMapperFactoryBean '" + holder.getBeanName() +"' 沒有注入MDataBaseTemplate对象！");
             }
             definition.setLazyInit(false);
         }
