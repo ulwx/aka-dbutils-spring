@@ -61,9 +61,6 @@
 </project>
 ```
 
-例子工程目录如下：
-
-<img src="pic/README/image-20210303152149402.png" alt="image-20210303152149402" style="zoom:50%;float:left" />
 
 下面为MyConfiguration配置类，用于声明数据源及事务相关的配置。
 
