@@ -6,7 +6,7 @@
 <dependency>
    <artifactId>aka-dbutils-spring</artifactId>
    <groupId>com.github.ulwx</groupId>
-   <version>1.0.0</version>
+   <version>1.0.3</version>
 </dependency>
 
 ```
@@ -25,7 +25,7 @@
    <parent>
       <groupId>com.github.ulwx</groupId>
       <artifactId>aka-dbutils-parent</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3.1</version>
       <relativePath>../aka-dbutils-parent/pom.xml</relativePath>
    </parent>
    <properties>
@@ -35,7 +35,6 @@
       <dependency>
          <artifactId>aka-dbutils-spring</artifactId>
          <groupId>com.github.ulwx</groupId>
-         <version>1.0.0</version>
       </dependency>
       <dependency>
          <groupId>org.springframework</groupId>
