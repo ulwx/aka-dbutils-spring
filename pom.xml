@@ -40,7 +40,6 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>${spring.version}</version>
 	  </dependency>
-
 	</dependencies>
 	<scm>
 		<connection>https://github.com/ulwx/aka-dbutils-spring.git</connection>
