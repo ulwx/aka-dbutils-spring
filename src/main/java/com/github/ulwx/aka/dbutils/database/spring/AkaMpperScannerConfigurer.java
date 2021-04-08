@@ -16,7 +16,7 @@ public class AkaMpperScannerConfigurer  implements BeanDefinitionRegistryPostPro
         InitializingBean, ApplicationContextAware, BeanNameAware {
 
     private String basePackage;
-    private String mdDataBaseTemplateBeanName;
+    private String mdDataBaseTemplateBeanName="mDataBaseTemplate";
     private ApplicationContext applicationContext;
     private String beanName;
 
