@@ -331,15 +331,12 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 			if(method.getName().equals("getMapper")){//getDataBase()
 				return MapperFactory.getMapper((Class)args[0],(MDataBase)obj);
 			}
-
-			MDataBase mDataBase=MDataBaseUtils.getMDataBase(MDataBaseTemplate.this,MDataBaseTemplate.this.dataBaseFactory);
-			if(method.getName().equals("getDataBase")){
-				Object result = method.invoke(mDataBase, args);
-				return result;
-			}else if(notInterceptorMethods.contains(method.getName())){
-				throw new  UnsupportedOperationException();
-			}
+			MDataBase mDataBase=null;
 			try {
+				if(notInterceptorMethods.contains(method.getName())){
+					throw new  UnsupportedOperationException();
+				}
+				mDataBase=MDataBaseUtils.getMDataBase(MDataBaseTemplate.this,MDataBaseTemplate.this.dataBaseFactory);
 				//调用原始方法
 				Object result = method.invoke(mDataBase, args);
 				if (!MDataBaseUtils.isSqlSessionTransactional(mDataBase, MDataBaseTemplate.this.dataBaseFactory)) {
@@ -352,7 +349,9 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 			}catch(Throwable t) {
 				throw t;
 			}finally {
-				MDataBaseUtils.closeMDataBase(mDataBase, MDataBaseTemplate.this.dataBaseFactory);
+				if(mDataBase!=null) {
+					MDataBaseUtils.closeMDataBase(mDataBase, MDataBaseTemplate.this.dataBaseFactory);
+				}
 			}
 		}
 	};
