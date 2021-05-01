@@ -72,8 +72,8 @@ public class MDataBaseUtils {
         return mDataBase;
     }
     public static boolean isSqlSessionTransactional(MDataBase mDataBase, MDataBaseFactory mDataBaseFactory) {
-        notNull(mDataBase, "NO MDataBase SPECIFIED");
-        notNull(mDataBaseFactory, "NO MDataBaseFactory SPECIFIED");
+        notNull(mDataBase, "NO MDataBase specified!");
+        notNull(mDataBaseFactory, "NO MDataBaseFactory specified!");
 
         MDataBaseHolder holder = (MDataBaseHolder) TransactionSynchronizationManager.getResource(mDataBaseFactory);
 

@@ -8,6 +8,7 @@ import com.github.ulwx.aka.dbutils.tool.PageBean;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -328,6 +329,11 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				MethodProxy proxy //代理方法
 			) throws Throwable {
 
+			AkaDBTemplateExecuteInfo akaDBTemplateExecuteInfo=new AkaDBTemplateExecuteInfo();
+			akaDBTemplateExecuteInfo.setMethod(method);
+			akaDBTemplateExecuteInfo.setTransactional(TransactionSynchronizationManager.isSynchronizationActive());
+			AkaMDataBaseTemplateExecuteInfoHolder.put(new AkaDBTemplateExecuteInfo());
+
 			if(method.getName().equals("getMapper")){//getDataBase()
 				return MapperFactory.getMapper((Class)args[0],(MDataBase)obj);
 			}
@@ -352,6 +358,7 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				if(mDataBase!=null) {
 					MDataBaseUtils.closeMDataBase(mDataBase, MDataBaseTemplate.this.dataBaseFactory);
 				}
+				AkaMDataBaseTemplateExecuteInfoHolder.put(null);
 			}
 		}
 	};
