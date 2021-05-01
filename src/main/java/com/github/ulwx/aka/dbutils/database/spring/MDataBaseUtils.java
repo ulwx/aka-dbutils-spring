@@ -51,7 +51,12 @@ public class MDataBaseUtils {
             logger.debug("fetch a MDataBase from MDataBaseHolder");
             return mDataBase;
         }
-        logger.debug("Creating a new MDataBase");
+
+        if(TransactionSynchronizationManager.isSynchronizationActive()){
+            logger.debug("Creating a new MDataBase and " + "Currently in a transaction!");
+        }else{
+            logger.debug("Creating a new MDataBase");
+        }
         Connection connection = DataSourceUtils.getConnection(mDataBaseFactory.getDataSource());
         boolean autoCommit = connection.getAutoCommit();
         boolean externalContralConClose=false;

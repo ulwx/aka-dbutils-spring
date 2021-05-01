@@ -17,12 +17,6 @@
 		<dependency>
 			<groupId>com.github.ulwx</groupId>
 			<artifactId>aka-dbutils</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>tomcat-jdbc</artifactId>
-					<groupId>org.apache.tomcat</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
