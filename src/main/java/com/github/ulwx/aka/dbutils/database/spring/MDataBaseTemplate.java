@@ -332,7 +332,7 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 			AkaDBTemplateExecuteInfo akaDBTemplateExecuteInfo=new AkaDBTemplateExecuteInfo();
 			akaDBTemplateExecuteInfo.setMethod(method);
 			akaDBTemplateExecuteInfo.setTransactional(TransactionSynchronizationManager.isSynchronizationActive());
-			AkaMDataBaseTemplateExecuteInfoHolder.put(new AkaDBTemplateExecuteInfo());
+			AkaMDataBaseTemplateExecuteInfoHolder.put(akaDBTemplateExecuteInfo);
 
 			if(method.getName().equals("getMapper")){//getDataBase()
 				return MapperFactory.getMapper((Class)args[0],(MDataBase)obj);
