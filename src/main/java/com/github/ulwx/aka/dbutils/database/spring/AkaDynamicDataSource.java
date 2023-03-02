@@ -39,7 +39,7 @@ public class AkaDynamicDataSource extends AbstractRoutingDataSource
             return poolName;
         }else if(DbContext.getMainSlaveModeConnectMode()== MainSlaveModeConnectMode.Connect_SlaveServer){
             TResult<String> tslaveName=new TResult<>();
-            DBPoolFactory.getInstance(xmlPoolFileName).selectSlaveDbPool(poolName,tslaveName, null);
+            DBPoolFactory.getInstance(xmlPoolFileName).selectSlaveDbPool(poolName,tslaveName);
             return tslaveName.getValue();
         }else if(DbContext.getMainSlaveModeConnectMode()== MainSlaveModeConnectMode.Connect_Auto){
             AkaDBTemplateExecuteInfo akaDBTemplateExecuteInfo=
@@ -48,7 +48,7 @@ public class AkaDynamicDataSource extends AbstractRoutingDataSource
                     akaDBTemplateExecuteInfo.getMethod().getName().startsWith("query")
                 && !akaDBTemplateExecuteInfo.isTransactional() ){//获取从库连接
                 TResult<String> tslaveName=new TResult<>();
-                DBPoolFactory.getInstance(xmlPoolFileName).selectSlaveDbPool(poolName,tslaveName, null);
+                DBPoolFactory.getInstance(xmlPoolFileName).selectSlaveDbPool(poolName,tslaveName);
                 return tslaveName.getValue();
             }else{//获取主库连接
                 return poolName;

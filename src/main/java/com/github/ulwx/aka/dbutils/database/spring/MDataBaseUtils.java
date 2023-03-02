@@ -46,14 +46,17 @@ public class MDataBaseUtils {
         DbContext.setDbTransInfo(dbTransInfo);
 
         MDataBaseHolder holder = (MDataBaseHolder) TransactionSynchronizationManager.getResource(mDataBaseFactory);
-        MDataBase mDataBase = mDataBaseHolder(holder);
-        if (mDataBase != null) {
-            logger.debug("fetch a MDataBase from MDataBaseHolder");
-            return mDataBase;
+        MDataBase mDataBase=null;
+        if(holder!=null) {
+            mDataBase = getMDatabseFromMDataBaseHolder(holder);
+            if (mDataBase != null) {
+                logger.debug("fetch a MDataBase from MDataBaseHolder");
+                return mDataBase;
+            }
         }
 
         if(TransactionSynchronizationManager.isSynchronizationActive()){
-            logger.debug("Creating a new MDataBase and " + "Currently in a transaction!");
+            logger.debug("Creating a new MDataBase and Currently in a transaction!");
         }else{
             logger.debug("Creating a new MDataBase");
         }
@@ -79,7 +82,7 @@ public class MDataBaseUtils {
 
         return (holder != null) && (holder.getMDataBase()== mDataBase);
     }
-    private static MDataBase mDataBaseHolder(MDataBaseHolder holder) {
+    private static MDataBase getMDatabseFromMDataBaseHolder(MDataBaseHolder holder) {
         MDataBase mDataBase = null;
         if (holder != null && holder.isSynchronizedWithTransaction()) {
             holder.requested();

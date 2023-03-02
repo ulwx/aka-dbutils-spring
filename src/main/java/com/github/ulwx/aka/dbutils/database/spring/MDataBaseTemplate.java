@@ -174,13 +174,30 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 
 
 	@Override
-	public String exeScript(String packageFullName, String sqlFileName, boolean throwWarning) throws DbException {
-		return mDataBaseProxy.exeScript(packageFullName, sqlFileName, throwWarning);
+	public String exeScriptInDir(String dirFilePath,
+								 String sqlFileName,
+								 boolean throwWarning,
+								 boolean continueIfError,
+								 String delimiters,
+								 String encoding) throws DbException {
+
+		return mDataBaseProxy.exeScriptInDir(dirFilePath, sqlFileName, throwWarning,continueIfError,
+				delimiters,encoding);
 	}
 
 	@Override
-	public String exeScript(String mdFullMethodName, String delimiters, Map<String, Object> args) throws DbException {
-		return mDataBaseProxy.exeScript(mdFullMethodName, delimiters, args);
+	public String exeScript(String packageFullName, String sqlFileName,
+							boolean throwWarning,boolean continueIfError,String delimiters,
+							String encoding) throws DbException {
+		return mDataBaseProxy.exeScript(packageFullName, sqlFileName, throwWarning,continueIfError,delimiters,encoding);
+	}
+
+
+	@Override
+	public String exeScript(String mdFullMethodName,
+							boolean throwWarning,String delimiters,
+							Map<String, Object> args) throws DbException {
+		return mDataBaseProxy.exeScript(mdFullMethodName,throwWarning, delimiters, args);
 	}
 
 	@Override
