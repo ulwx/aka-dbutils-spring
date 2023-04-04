@@ -38,12 +38,7 @@ public class MDataBaseUtils {
 
     }
 
-    public static MDataBase getMDataBase(MDataBaseTemplate mDataBaseTemplate, MDataBaseFactory mDataBaseFactory) throws SQLException{
-
-        DBTransInfo dbTransInfo=new  DBTransInfo();
-        dbTransInfo.setmDataBaseFactory(mDataBaseFactory);
-        dbTransInfo.setmDataBaseTemplate(mDataBaseTemplate);
-        DbContext.setDbTransInfo(dbTransInfo);
+    public static MDataBase getMDataBase(MDataBaseFactory mDataBaseFactory) throws SQLException{
 
         MDataBaseHolder holder = (MDataBaseHolder) TransactionSynchronizationManager.getResource(mDataBaseFactory);
         MDataBase mDataBase=null;

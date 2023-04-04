@@ -10,28 +10,26 @@ import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 public class AkaMpperScannerConfigurer  implements BeanDefinitionRegistryPostProcessor,
-        InitializingBean, ApplicationContextAware, BeanNameAware {
+        InitializingBean, ApplicationContextAware, BeanNameAware, EnvironmentAware {
 
-    private String basePackage;
+    private String basePackages;
     private String mdDataBaseTemplateBeanName="mDataBaseTemplate";
     private ApplicationContext applicationContext;
     private String beanName;
+    private Environment environment;
 
-    /**
-     * This property lets you set the base package for your mapper interface files.
-     * <p>
-     * You can set more than one package by using a semicolon or comma as a separator.
-     * <p>
-     * Mappers will be searched for recursively starting in the specified package(s).
-     *
-     * @param basePackage
-     *          base package name
-     */
-    public void setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment=environment;
+    }
+
+    public void setBasePackages(String basePackages) {
+        this.basePackages = basePackages;
     }
 
 
@@ -60,29 +58,20 @@ public class AkaMpperScannerConfigurer  implements BeanDefinitionRegistryPostPro
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void afterPropertiesSet() throws Exception {
-       // notNull(this.basePackage, "Property 'basePackage' is required");
+
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
         // left intentionally blank
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1.0.2
-     */
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+
 
         AkaClassPathMapperScanner scanner = new AkaClassPathMapperScanner(registry);
         scanner.setResourceLoader(this.applicationContext);
@@ -96,8 +85,9 @@ public class AkaMpperScannerConfigurer  implements BeanDefinitionRegistryPostPro
         });
         scanner.registerFilters();
         scanner.scan(
-                StringUtils.tokenizeToStringArray(this.basePackage,
+                StringUtils.tokenizeToStringArray(this.basePackages,
                         ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS));
+
     }
 
 

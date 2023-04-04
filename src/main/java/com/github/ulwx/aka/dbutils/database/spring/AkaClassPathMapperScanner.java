@@ -23,7 +23,7 @@ import java.util.Set;
 public class AkaClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
     private static final Logger LOGGER = LoggerFactory.getLogger(AkaClassPathMapperScanner.class);
 
-    private  static String mdatabase_template_property_name="mDataBaseTemplate";
+    private  static final String mdatabase_template_property_name="mDataBaseTemplate";
 
     private String mdDataBaseTemplateBeanName;
 
@@ -136,5 +136,7 @@ public class AkaClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
                     + beanDefinition.getBeanClassName() + "' mapperType" + ". Bean already defined with the same name!");
             return false;
         }
+
+
     }
 }

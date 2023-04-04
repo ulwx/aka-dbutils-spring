@@ -359,7 +359,13 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				if(notInterceptorMethods.contains(method.getName())){
 					throw new  UnsupportedOperationException();
 				}
-				mDataBase=MDataBaseUtils.getMDataBase(MDataBaseTemplate.this,MDataBaseTemplate.this.dataBaseFactory);
+
+				DBTransInfo dbTransInfo=new  DBTransInfo();
+				dbTransInfo.setmDataBaseFactory(MDataBaseTemplate.this.dataBaseFactory);
+				dbTransInfo.setmDataBaseTemplate(MDataBaseTemplate.this);
+				DbContext.setDbTransInfo(dbTransInfo);
+
+				mDataBase=MDataBaseUtils.getMDataBase(MDataBaseTemplate.this.dataBaseFactory);
 				//调用原始方法
 				Object result = method.invoke(mDataBase, args);
 				if (!MDataBaseUtils.isSqlSessionTransactional(mDataBase, MDataBaseTemplate.this.dataBaseFactory)) {
@@ -375,6 +381,7 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				if(mDataBase!=null) {
 					MDataBaseUtils.closeMDataBase(mDataBase, MDataBaseTemplate.this.dataBaseFactory);
 				}
+				DbContext.clearDbTransInfo();
 				AkaMDataBaseTemplateExecuteInfoHolder.put(null);
 			}
 		}
