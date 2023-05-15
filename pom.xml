@@ -10,7 +10,7 @@
 		<relativePath>../aka-dbutils-parent/pom.xml</relativePath>
 	</parent>
 	<properties>
-		<spring.version>5.3.25</spring.version>
+
 	</properties>
 
 	<dependencies>
