@@ -5,9 +5,9 @@
 	<groupId>com.github.ulwx</groupId>
 	<parent>
 		<groupId>com.github.ulwx</groupId>
-		<artifactId>aka-dbutils-parent</artifactId>
+		<artifactId>aka-common-parent</artifactId>
 		<version>2.0-SNAPSHOT</version>
-		<relativePath>../aka-dbutils-parent/pom.xml</relativePath>
+		<relativePath>../aka-common-parent/pom.xml</relativePath>
 	</parent>
 	<properties>
 
