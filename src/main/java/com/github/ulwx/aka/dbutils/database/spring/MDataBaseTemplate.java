@@ -10,9 +10,8 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.Savepoint;
 import java.util.*;
 
 public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements MDataBase {
@@ -367,7 +366,7 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 
 				mDataBase=MDataBaseUtils.getMDataBase(MDataBaseTemplate.this.dataBaseFactory);
 				//调用原始方法
-				Object result = method.invoke(mDataBase, args);
+				Object result =method.invoke(mDataBase, args);
 				if (!MDataBaseUtils.isSqlSessionTransactional(mDataBase, MDataBaseTemplate.this.dataBaseFactory)) {
 					if (!mDataBase.isColsed() && !mDataBase.getAutoCommit()) {
 						mDataBase.commit();
@@ -376,6 +375,10 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				return result;
 
 			}catch(Throwable t) {
+				if(t instanceof InvocationTargetException){
+					InvocationTargetException invocationTargetException=(InvocationTargetException)t;
+					throw invocationTargetException.getTargetException();
+				}
 				throw t;
 			}finally {
 				if(mDataBase!=null) {
