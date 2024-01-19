@@ -318,8 +318,8 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 	}
 
 	@Override
-	public <T> int[] delBy(T[] deleteObjects, Object[] whereProperteis) throws DbException {
-		return mDataBaseProxy.delBy(deleteObjects, whereProperteis);
+	public <T> int[] delManyBy(T[] deleteObjects, Object[] whereProperteis) throws DbException {
+		return mDataBaseProxy.delManyBy(deleteObjects, whereProperteis);
 	}
 	@Override
 	public DBMS getDataBaseType() {
