@@ -5,6 +5,8 @@ import com.github.ulwx.aka.dbutils.database.MDMethods.One2ManyMapNestOptions;
 import com.github.ulwx.aka.dbutils.database.MDMethods.One2OneMapNestOptions;
 import com.github.ulwx.aka.dbutils.database.dialect.DBMS;
 import com.github.ulwx.aka.dbutils.tool.PageBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
@@ -15,6 +17,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements MDataBase {
+	private final static Logger log = LoggerFactory.getLogger(MDataBaseTemplate.class);
 	private MDataBaseFactory dataBaseFactory;
 	private final MDataBaseImpl mDataBaseProxy;
 
@@ -375,6 +378,7 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				return result;
 
 			}catch(Throwable t) {
+				log.error(""+t,t);
 				if(t instanceof InvocationTargetException){
 					InvocationTargetException invocationTargetException=(InvocationTargetException)t;
 					throw invocationTargetException.getTargetException();
