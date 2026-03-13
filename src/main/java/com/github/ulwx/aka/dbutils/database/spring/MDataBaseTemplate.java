@@ -378,7 +378,6 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 				return result;
 
 			}catch(Throwable t) {
-				log.error(""+t,t);
 				if(t instanceof InvocationTargetException){
 					InvocationTargetException invocationTargetException=(InvocationTargetException)t;
 					throw invocationTargetException.getTargetException();
