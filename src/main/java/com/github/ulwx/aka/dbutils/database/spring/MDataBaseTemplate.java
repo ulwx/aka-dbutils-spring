@@ -98,7 +98,8 @@ public  class MDataBaseTemplate extends MDataBaseTemplateUnSupported implements 
 	}
 
 	@Override
-	public void callStoredPro(String mdFullMethodName, Map<String, Object> parms, Map<String, Object> outPramsValues, List<DataBaseSet> returnDataBaseSets) throws DbException {
+	public void callStoredPro(String mdFullMethodName, Map<String, Object> parms,
+							  Map<String, Object> outPramsValues, List<DataBaseSet> returnDataBaseSets) throws DbException {
 		 mDataBaseProxy.callStoredPro(mdFullMethodName, parms, outPramsValues, returnDataBaseSets);
 	}
 
